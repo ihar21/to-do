@@ -17,3 +17,15 @@ class Task(Base):
         return f"<Task(id={self.id}), name={self.name}, description={self.description}"
 
 Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind = engine)
+session = Session()
+
+#test
+#session.add_all([
+#    Task(name="Test task1", description="dfsds")
+#])
+session.commit()
+
+for task in session.query(Task).all():
+    print(task)
